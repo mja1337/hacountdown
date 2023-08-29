@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown ❤️</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+        }
+        #countdown {
+            font-size: 48px;
+            color: #666;
+            margin: 20px 0;
+        }
+        #anniversary-text {
+            font-size: 48px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Countdown ❤️</h1>
+    <div id="countdown"></div>
+    <div id="anniversary-text"></div>
+
+    <script>
+        function updateCountdown() {
+            const today = new Date();
+            const nextAnniversary = new Date(today.getFullYear(), 7, 21); // August 21st
+
+            // If today is after August 21st, set nextAnniversary to next year
+            if (today > nextAnniversary) {
+                nextAnniversary.setFullYear(today.getFullYear() + 1);
+            }
+
+            // Calculate time difference
+            const diff = nextAnniversary - today;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // Update the countdown
+            document.getElementById('countdown').innerText = `❤️ ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds ❤️`;
+
+            // Update the anniversary text
+            if (days === 0) {
+                document.getElementById('anniversary-text').innerText = "HA ❤️";
+            } else {
+                const daysSinceLastAnniversary = 365 - days;
+                document.getElementById('anniversary-text').innerText = "HA+" + daysSinceLastAnniversary + " ❤️";
+            }
+        }
+
+        // Call the function immediately and set interval to update every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+
+</html>
